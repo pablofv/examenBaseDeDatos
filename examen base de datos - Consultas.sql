@@ -100,9 +100,3 @@ order by c.nombre asc;
 -- 10- Eliminar el registro del segundo paquete enviado a MENDOZA en el punto 6.
 delete from paquete where id_paquete = 4;
 delete from detalledepaquetes where id_detalleDePaquetes = 4;
-
-select * from ciudades;
-select * from camioneros;
-select * from camiones;
-select * from paquete;
-select * from detalleDePaquetes;
