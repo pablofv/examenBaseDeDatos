@@ -44,3 +44,65 @@ insert into detalledepaquetes(id_detalleDePaquetes, id_camioneros, matricula)
 					   values(3, 2, 718);
 insert into detalledepaquetes(id_detalleDePaquetes, id_camioneros, matricula)
 					   values(4, 2, 718);
+
+-- 7- Modificar la Matrícula del camión SCANIA por 8795.
+-- SET SQL_SAFE_UPDATES = 0; para que permite actualizar la clave primaria.
+update camiones
+set matriculas = 8795
+where marca = 'SCANIA';
+
+-- 8- Calcular el monto de dinero que se paga en sueldos a todos los camioneros.
+select sum(sueldo) total_sueldos from camioneros;
+
+insert into paquete(id_paquete, descripcion, destinatario, direccion, id_camioneros, id_ciudades)
+		     values(5, 'Envío 5', 'Karina', 'Lavalle 3220', 2, 3);
+insert into paquete(id_paquete, descripcion, destinatario, direccion, id_camioneros, id_ciudades)
+		     values(6, 'Envío 6', 'Marcos', 'Viamonte 1540', 2, 1);
+insert into paquete(id_paquete, descripcion, destinatario, direccion, id_camioneros, id_ciudades)
+		     values(7, 'Envío 7', 'Orlando', 'Libertad 1320', 1, 1);
+insert into paquete(id_paquete, descripcion, destinatario, direccion, id_camioneros, id_ciudades)
+		     values(8, 'Envío 8', 'Candela', 'Aristóbulo del Valle 7523', 3, 3);
+insert into paquete(id_paquete, descripcion, destinatario, direccion, id_camioneros, id_ciudades)
+		     values(9, 'Envío 9', 'Martín', 'Edison 4470', 2, 1);
+insert into paquete(id_paquete, descripcion, destinatario, direccion, id_camioneros, id_ciudades)
+		     values(10, 'Envío 10', 'Juan', 'Av. Marquez 88', 3, 1);
+insert into paquete(id_paquete, descripcion, destinatario, direccion, id_camioneros, id_ciudades)
+		     values(11, 'Envío 11', 'Ramón', 'Uruguay 390', 1, 3);
+insert into paquete(id_paquete, descripcion, destinatario, direccion, id_camioneros, id_ciudades)
+		     values(12, 'Envío 12', 'Brisa', 'Misiones 645', 1, 2);
+
+insert into detalledepaquetes(id_detalleDePaquetes, id_camioneros, matricula)
+					   values(5, 2, 255);
+insert into detalledepaquetes(id_detalleDePaquetes, id_camioneros, matricula)
+					   values(6, 2, 718);
+insert into detalledepaquetes(id_detalleDePaquetes, id_camioneros, matricula)
+					   values(7, 3, 8795);
+insert into detalledepaquetes(id_detalleDePaquetes, id_camioneros, matricula)
+					   values(8, 1, 255);
+insert into detalledepaquetes(id_detalleDePaquetes, id_camioneros, matricula)
+					   values(9, 3, 8795);
+insert into detalledepaquetes(id_detalleDePaquetes, id_camioneros, matricula)
+					   values(10, 1, 718);
+insert into detalledepaquetes(id_detalleDePaquetes, id_camioneros, matricula)
+					   values(11, 2, 255);
+insert into detalledepaquetes(id_detalleDePaquetes, id_camioneros, matricula)
+					   values(12, 3, 8795);
+
+-- 9- Listar por orden alfabético en forma ascendente, la cantidad de paquetes que
+-- transporta cada Camionero a la ciudad de SALTA.
+select c.nombre, count(*) "cantidad paquetes"
+from paquete p join camioneros c on p.id_camioneros = c.id_camioneros
+			   join ciudades ci on p.id_ciudades = ci.id_ciudades
+where ci.id_ciudades = 3 -- Salta -> 3
+group by c.nombre
+order by c.nombre asc;
+
+-- 10- Eliminar el registro del segundo paquete enviado a MENDOZA en el punto 6.
+delete from paquete where id_paquete = 4;
+delete from detalledepaquetes where id_detalleDePaquetes = 4;
+
+select * from ciudades;
+select * from camioneros;
+select * from camiones;
+select * from paquete;
+select * from detalleDePaquetes;
